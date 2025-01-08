@@ -17,10 +17,10 @@ function TodoList() {
 export default TodoList;
 ```
 - The todo item has one description field named `description`.
-- We need one state for the description and one array state for all todos. Let’s declare states using the `useState` hook function but first, we have to declare interface for our todo item. The `interface Todo` in TypeScript is used to define the shape of the `Todo` object.
+- We need one state for the description and one array state for all todos. Let's declare states using the `useState` hook function but first, we have to declare type for our todo item. The `type Todo` in TypeScript is used to define the shape of the `Todo` object.
 
 ```tsx
-interface Todo {
+type Todo = {
   description: string;
 }
 
@@ -38,7 +38,7 @@ Now, we can declare states:
 ```tsx title="TodoList.tsx"
 import { useState } from "react";
 
-interface Todo {
+type Todo = {
   description: string;
 }
 
@@ -55,7 +55,7 @@ function TodoList() {
 export default TodoList;
 ```
 - The type of `todo` is `Todo` object. It is an object with a single property `description` initialized to an empty string ('').
-- The type of `todos` is an array of `Todo` objects (`Todo[]`), where `Todo` is an interface that defines the shape of a todo item.
+- The type of `todos` is an array of `Todo` objects (`Todo[]`), where `Todo` is an type that defines the shape of a todo item.
 
 Next, we render the necessary elements to gather information and call the function that adds a new todo.
 - The `input` element is used to collect data from a user.
@@ -101,6 +101,11 @@ return (
     <button onClick={addTodo}>Add</button>
     //highlight-start
     <table>
+      <thead>
+        <tr>
+          <td>Description</td>
+        </tr>
+      </thead>
       <tbody>
         {todos.map((todo, index) => (
           <tr key={index}>
@@ -122,7 +127,7 @@ export default TodoList;
 ```tsx title="TodoList.tsx"
 import { useState } from "react";
 
-interface Todo {
+type Todo = {
   description: string;
 }
 
@@ -143,6 +148,11 @@ function TodoList() {
       />
       <button onClick={addTodo}>Add</button>
       <table>
+        <thead>
+          <tr>
+            <td>Description</td>
+          </tr>
+        </thead>
         <tbody>
           {todos.map((todo, index) => (
             <tr key={index}>
@@ -226,7 +236,10 @@ table td {
 ```
 ---
 ### Split components
-- Let's refactor the todolist example application by breaking it into multiple components.  **Note:** We'll use the todo item from the assignment, which also includes a date.
+- Let's refactor the todolist example application by breaking it into multiple components.  
+:::note 
+In this part, we  use the todolist from the assignment, which also includes a date field and delete functionality.
+:::
 - We will add a new stateless component called `TodoTable` and separate it from the `TodoList` component.
 - After splitting the components, our component tree is the following:
 
@@ -244,15 +257,17 @@ function TodoTable(props) {
 
 export default TodoTable;
 ```
-- We need to define the type for the `props`, which is an array of `todo` objects. Therefore, we define a new interface called `TodoTableProps`.
+- We need to define the type for the `props`, which contains an array of `todo` objects and delete function. Therefore, we define a new type called `TodoTableProps`.
 
 ```tsx
-interface Todo {
+type Todo = {
   description: string;
+  date: string;
 }
 
-interface TodoTableProps {
+type TodoTableProps = {
   todos: Todo[];
+  handleDelete: (row: number) => void;
 }
 
 function TodoTable(props: TodoTableProps) {
@@ -263,19 +278,20 @@ function TodoTable(props: TodoTableProps) {
 
 export default TodoTable;
 ```
-- You will notice that we have defined the same `Todo` interface in two files. Instead of doing that, it is better to create a separate file for defining interfaces and then import these interfaces into the files where they are needed. Create a new file called `types.ts` in the `src` folder and define the interfaces there.
+- You will notice that we have defined the same `Todo` type in two files. Instead of doing that, it is better to create a separate file for defining types and then import these into the files where they are needed. Create a new file called `types.ts` in the `src` folder and define the types there.
 
 ```ts title="types.ts"
-export interface Todo {
+export type Todo = {
   description: string;
   date: string;
 }
 
-export interface TodoTableProps {
+export type TodoTableProps = {
   todos: Todo[];
+  handleDelete: (row: number) => void;
 }
 ```
-- Then, we import the interface into the TodoTable component where they are needed.
+- Then, we import the type into the `TodoTable` component where they are needed.
 ```tsx title="TodoTable.tsx"
 import { TodoTableProps } from './types';
 
@@ -287,7 +303,7 @@ function TodoTable(props: TodoTableProps) {
 
 export default TodoTable;
 ```
-- Now, you can also remove `todo` interface definition in the `TodoList` component and import if from the `types.ts` file.
+- Now, you can also remove `todo` type definition in the `TodoList` component and import if from the `types.ts` file.
 - Next, we render table in the `TodoTable` component.
 ```tsx title="TodoTable.tsx"
 import { TodoTableProps } from "./types";
@@ -300,6 +316,7 @@ function TodoTable(props: TodoTableProps) {
           <tr>
             <th>Description</th>
             <th>Date</th>
+            <td>Action</td>
           </tr>
         </thead>
         <tbody>
@@ -307,6 +324,11 @@ function TodoTable(props: TodoTableProps) {
             <tr key={index}>
               <td>{todo.description}</td>
               <td>{todo.date}</td>
+              <td>
+                <button onClick={() => props.handleDelete(index)}>
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -326,7 +348,7 @@ The `TodoTable` component will be a **stateless component**. The stateless compo
 ```js title="TodoList.tsx"
 import TodoTable from "./TodoTable";
 ```
-- Remove the HTML table element from the `TodoList` component's `return` statement and add the `TodoTable` component there and pass `todos` state using props.
+- Remove the HTML table element from the `TodoList` component's `return` statement and add the `TodoTable` component there and pass `todos` state and `handleDelete` funtion  using props.
 
 ```jsx title="TodoList.tsx"
 return (
@@ -338,7 +360,7 @@ return (
     />
     <button onClick={addTodo}>Add</button>
     //highlight-next-line
-    <TodoTable todos={todos} />
+    <TodoTable todos={todos} handleDelete={handleDelete} />
   </>
 );
 ```
@@ -348,9 +370,7 @@ return (
 - **Linters** in programming are tools designed to analyze source code and identify potential issues, coding style violations, and error
 - **ESLint** is popular linter for JavaScript and TypeScript. Vite is using ESLint by default.
 - You can find the ESLint configuration file `eslint.config.cjs` from the root folder of your Vite project. You can define ESLint rules in this file to specify coding standards and guidelines for your project. 
-- You might have seen that ESLint is giving a warning about missing `PropTypes`. We introduced PropTypes at the beginning of the course, but we haven't used them. React recommends using TypeScript instead of checking prop types at runtime.  
 
-- You can exclude the PropTypes check by adding the highlighted line in your `.eslint.config.cjs` file:
 ```js title="eslint.config.cjs"
 export default [
   { ignores: ['dist'] },
@@ -381,8 +401,6 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
-      //highlight-next-line
-      'react/prop-types': 0 
     },
   },
 ]
