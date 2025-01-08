@@ -4,8 +4,8 @@
   <ShortName>Front End Programming</ShortName>
   <Description>Search Front End Programming</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Image width="16" height="16" type="image/x-icon">https://haagahelia.github.io/frontendprogramming/img/favicon.ico</Image>
-  <Url type="text/html" method="get" template="https://haagahelia.github.io/frontendprogramming/search?q={searchTerms}"/>
-  <Url type="application/opensearchdescription+xml" rel="self" template="https://haagahelia.github.io/frontendprogramming/opensearch.xml" />
-  <moz:SearchForm>https://haagahelia.github.io/frontendprogramming/</moz:SearchForm>
+  <Image width="16" height="16" type="image/x-icon">https://frontendprogramming.onrender.com/img/favicon.ico</Image>
+  <Url type="text/html" method="get" template="https://frontendprogramming.onrender.com/search?q={searchTerms}"/>
+  <Url type="application/opensearchdescription+xml" rel="self" template="https://frontendprogramming.onrender.com/opensearch.xml" />
+  <moz:SearchForm>https://frontendprogramming.onrender.com/</moz:SearchForm>
 </OpenSearchDescription>
