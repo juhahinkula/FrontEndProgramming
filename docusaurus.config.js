@@ -9,10 +9,10 @@ const config = {
   tagline: 'Haaga-Helia Front End Programming course',
   favicon: 'img/favicon.ico',
 
-  url: 'https://haagahelia.github.io',
+  url: 'https://frontendprogramming.onrender.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/frontendprogramming/',
+  baseUrl: '/',
   plugins: ['@docusaurus/theme-live-codeblock'],
  
   // GitHub pages deployment config.

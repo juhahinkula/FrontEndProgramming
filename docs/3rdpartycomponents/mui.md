@@ -39,8 +39,7 @@ function App() {
 
 export default App
 ```
-
-- MUI uses Google Roboto fonts and you can read the installation instructions in https://mui.com/material-ui/getting-started/installation/#roboto-font
+- Material UI uses Google Roboto fonts and you can read the installation instructions in https://mui.com/material-ui/getting-started/installation/#roboto-font
 - Now, we are ready to use other UI components.
 
 ### Button
@@ -51,7 +50,6 @@ export default App
 ```js title="TodoList.tsx"
 import Button from "@mui/material/Button"
 ```
-
 - Then, we change the HTML button elements to the `Button` component:
 
 ```jsx {15-16} title="TodoList.tsx"
@@ -85,8 +83,7 @@ return (
   </>
 )
 ```
-
-- Material Design has three different button variants (styles): Text, Outlined, and Contained. The default variant used in Material UI is Text. You can use `variant` prop to change the value.
+- Material UI has three different button variants (styles): Text, Outlined, and Contained. The default variant used in Material UI is Text. You can use `variant` prop to change the value.
 
 ```js
 // Change button variant
@@ -142,8 +139,7 @@ return (
   </>
 )
 ```
-
-- Material Design has three different text field variants (styles): Standard, Outlined, and Filled. The default variant used in Material UI is Outlined. You can use `variant` prop to change the value.
+- Material UI has three different text field variants (styles): Standard, Outlined, and Filled. The default variant used in Material UI is Outlined. You can use `variant` prop to change the value.
 - The `TextField` component props are listed in https://mui.com/material-ui/api/text-field/.
 - Now, your UI should look like the following:
 
@@ -195,9 +191,7 @@ return (
   </>
 )
 ```
-
 - Finally, we set alignment using the `justifyContent` and `alignItems` props to center components horizontally and vertically.
-
 ```jsx
 <Stack
   direction="row"
@@ -206,12 +200,11 @@ return (
   alignItems="center"
 >
 ```
-
 - Now, your Todolist UI should look the following:
 
 ![Todolist](./img/todolist6.png)
 
-- Material Design app bar displays information and actions relating to the current screen. We can implement the app bar by using the Material UI `AppBar` component (https://mui.com/material-ui/react-app-bar/).
+- Material UI app bar displays information and actions relating to the current screen. We can implement the app bar by using the Material UI `AppBar` component (https://mui.com/material-ui/react-app-bar/).
 - We will implement app bar in the `App` component. Add the following imports to your App.tsx file.
 
 ```js title="App.tsx"
@@ -237,13 +230,11 @@ function App() {
   )
 }
 ```
-
 - Now, if you look the Todolist UI, it already looks nice but now you need some spacing between the app bar and text fields. You can use the `mt` prop of the `Stack` component to get top margin to your text fields and buttons. The Material UI provides custom props that you can use to change CSS properties https://mui.com/system/properties/#properties-reference-table
 
 ```jsx title="TodoList.jsx"
 <Stack mt={2} direction="row" spacing={2} justifyContent="center" alignItems="center">
 ```
-
 - Finally, your Todolist should look like the following screenshot:
   ![Todolist](./img/todolist7.png)
 - Now, we are ready with our Todolist app but you can try to use more different Material UI components in your UI. You can, for example, use icon buttons (https://mui.com/system/properties/#properties-reference-table). You can also use drop down in priority, so that only pre-defined priority values can be selected (https://mui.com/material-ui/react-select/).

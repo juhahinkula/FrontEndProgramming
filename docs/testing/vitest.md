@@ -61,10 +61,9 @@ Install the libraries using the following npm command:
 ```bash
 npm install -D jsdom @testing-library/react @testing-library/jest-dom
 ```
-
 - We also have to change our vitest configuration.
 
-```js title="vitest.config.js"
+```js title="vitest.config.ts"
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
@@ -79,7 +78,7 @@ export default defineConfig({
 - `environment` - Defines the environment that will be used for testing (Node.js is default). We will use browser based environment **jsdom**.
 
 - Now, we will create our first test case using the todolist that we have developed. If you follow this example, you should add 'My Todolist' header to your own App component. Our test cases renders the App component and check that there is 'My Todolist' text.
-- Create a new file called **_App.test.jsx_** in the `src` folder and add the first test case.
+- Create a new file called **_App.test.tsx_** in the `src` folder and add the first test case.
 
 ```tsx title="App.test.tsx"
 import App from "./App";
@@ -89,7 +88,7 @@ test("renders header", () => {});
 ```
 - Import the `render` method from the React testing library. The `render` method can be used to render React component for testing.
 
-```js title="App.test.jsx"
+```js title="App.test.tsx"
 import App from "./App";
 import { test } from "vitest";
 // highlight-next-line
@@ -101,7 +100,6 @@ test("renders App component", () => {
   render(<App />);
 });
 ```
-
 - Next, import the `screen` method from the React Testing Library.
 - The `screen` method returns an object that provides queries (i.e. `getByText`, `getByLabelText` etc.) that are bound to the whole rendered `document.body`. These queries can be used to find elements from the HTML document.
 - In the following example, we use `getByText()` query to find an element with specified text.

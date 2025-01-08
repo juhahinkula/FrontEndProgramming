@@ -147,8 +147,8 @@ type AppStatus = "success" | "error" | "loading";
 - The `|` operator defines a union of string values. It allows only three possible string values: "awake", "sleep", or "eating". That can be used to ensure that variables only contain these specific values.
 
 #### Structural types
-- Structural types (define entities) are used a lot with React. For example, typing component props.
-- You can use `interface` or `type` keyword.
+- Structural type are used a lot with React. For example, typing component props or complex states.
+- To define strutural types, you can use `interface` or `type` keyword.
 
 ```ts
 interface Person {
@@ -190,7 +190,6 @@ type Person = {
   address: Address;
 }
 ```
-
 ### React & TypeScript
 - You can use TypeScript in your Vite React project by selecting **TypeScript** variant when creating a Vite project:
 

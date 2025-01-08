@@ -188,7 +188,7 @@ import { useRef, useState } from 'react'
 
 function TodoList() {
   const [todo, setTodo] = useState({ description: '', duedate: '', priority: '' });
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
   //highlight-next-line
   const gridRef = useRef<AgGridReact<Todo>>(null);
 ```
@@ -241,7 +241,6 @@ return (
   </>
 )
 ```
-
 - Finally, we implement the `handleDelete` function. We can use the grid API's `getSelectedNodes` method, which returns an array of selected rows. We are using the single selection mode; therefore, it only returns one row. The row index can be get from the row object's `id` property. We use the JavaScript `filter` function to filter selected row from the `todos` state. The `filter` function creates a new array containing elements from the original array that meet a specific condition. It does not modify the original array but returns a new array with the filtered elements.
 
 ```ts title="TodoList.tsx"
@@ -253,7 +252,6 @@ const handleDelete = () => {
   )
 }
 ```
-
 - If you select a row in the grid and press the Delete button, the selected row is deleted from the grid. If you don't select any row and press the Delete button, you can see an error in the console. We also have to check that one row is selected before filtering.
 
 ```ts title="TodoList.tsx"
