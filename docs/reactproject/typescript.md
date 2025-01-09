@@ -221,6 +221,28 @@ export default Hello
 
 ![](./img/ts_error.png)
 
+:::note[Type vs interface]
+Both `type` and `interface` can be used to define the shape of props in TypeScript. The choice between them can depend on your specific use case.
+
+ Here is an example using interface:
+
+```tsx
+interface HelloProps {
+  name: string;
+  age: number;
+}
+
+function Hello({ name, age }: HelloProps) {
+  return (
+    <div>
+      Hello {name}, you are {age} years old!
+    </div>
+  )
+}
+```
+Interfaces can be extended using the extends keyword, allowing for easy composition and reuse of types. Type can create union and intersection types, which can be very powerful for complex type definitions.
+:::
+
 - You can define optional props using the `?`, for example:
 ```tsx
 type HelloProps = {
