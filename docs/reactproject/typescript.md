@@ -118,7 +118,6 @@ function logMessage(message: string): void {
 
 #### Arrays
 - Arrays are declared with the following syntax:
-
 ```ts
 const arr: type[]
 ```
@@ -137,8 +136,7 @@ let names: Array<string> = ['Lisa', 'Mike', 'Greg'];
 ```
 
 #### Union types
-
-- You can also combine more complex types using union types:
+- You can combine more complex types using union types:
 ```ts
 type MyStates = "awake" | "sleep" | "eating"
 
@@ -149,7 +147,6 @@ type AppStatus = "success" | "error" | "loading";
 #### Structural types
 - Structural type are used a lot with React. For example, typing component props or complex states.
 - To define strutural types, you can use `interface` or `type` keyword.
-
 ```ts
 interface Person {
   name: string;
@@ -161,10 +158,9 @@ type Point = {
   y: number;
 }
 ```
-- See the difference between types and interfaces: https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces
+- See the difference between types and interfaces: https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces.
 
 - If you have nested objects in your entities, for example:
-
 ```ts
 type Person = {
   name: string;
@@ -192,8 +188,7 @@ type Person = {
 ```
 ### React & TypeScript
 - You can use TypeScript in your Vite React project by selecting **TypeScript** variant when creating a Vite project:
-
-```
+```bash
 npm create vite@latest
 ```
 - React provides `@types/react` and `@types/react-dom` packages that offer useful types for React. If you create Vite project using TypeScript, these packages are installed as development dependencies. There is also a configuration file `tsconfig.app.json` created in the Vite project for TypeScript, and it specifies the compiler options required to compile the project.
@@ -222,10 +217,9 @@ export default Hello
 ![](./img/ts_error.png)
 
 :::note[Type vs interface]
-Both `type` and `interface` can be used to define the shape of props in TypeScript. The choice between them can depend on your specific use case.
+Both `type` and `interface` can be used to define the shape of props in TypeScript. The choice between them can depend on your specific use case. In this course we are mostly using `type`.
 
- Here is an example using interface:
-
+Here is an example using interface:
 ```tsx
 interface HelloProps {
   name: string;
@@ -290,7 +284,6 @@ export default Hello
 ```
 #### useState hook
 - Type interference works with useState hooks function. For example, if you declare following state:
-
 ```ts
 const [isReady, setReady] = useState(false)
 ```
@@ -298,11 +291,9 @@ const [isReady, setReady] = useState(false)
 ```ts
 setReady(10)
 ```
-
 ![](./img/ts_error2.png)
 
 - If you have complex state, you can use `type` or `interface`, for example:
-
 ```ts
 // declare type
 type User = {
@@ -318,16 +309,14 @@ const [user, setUser] = useState<User>({} as User)
 ```
 
 - You can also explicitly define types. For example, if you want to initialize state with `null` or `undefined` value.
-
 ```ts
 const [value, setValue] = useState<string | undefined>(undefined)
 ```
-
 - Specifying type for array state
-
 ```ts
 const [values, setValues] = useState<Array<string>>([])
 ```
+
 #### Forms & Events
 - In the example below, the `inputChanged` function is used to handle input element change events. In TypeScript, you have to define event types, otherwise you will the following error.
 
@@ -335,7 +324,6 @@ const [values, setValues] = useState<Array<string>>([])
 
 - The type for input element change event is `React.ChangeEvent`
 - The type for form submit event is `React.FormEvent`, like shown in the following code.
-
 ```ts
 const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   setPerson({ ...person, [event.target.id]: event.target.value })
@@ -349,7 +337,6 @@ const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 - The whole `Form` component source code: https://github.com/juhahinkula/reactts/blob/main/src/Form.tsx
 
 - If you have interfaces or types that are common to multiple files, you can define these in a separate file and use `export`.
-
 ```ts
 // types.ts
 export type Address = {
