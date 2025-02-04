@@ -130,7 +130,7 @@ names = ["John", "Lisa", "Mike"]
 let nums: number[] = new Array(10)
 nums[0] = 4
 ```
-- You can also use generic array tyoe `Array<typeOfElement>`:
+- You can also use generic array type `Array<typeOfElement>`:
 ```ts
 let names: Array<string> = ['Lisa', 'Mike', 'Greg'];
 ```
