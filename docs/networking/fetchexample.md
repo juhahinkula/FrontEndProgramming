@@ -78,6 +78,27 @@ else {
 ```
 ![Nasa API example](./img/nasa2.png)
 
+Now, in the case of an error, the 'Loading...' text is shown indefinitely. To handle this, we can create a state to track the loading status. The default value of the state is `false`, and we update it to `true` when the fetch starts. We then set it back to `false` using the `finally` statement, which executes whether the fetch succeeds or fails.
+
+```jsx
+const [loading, setLoading] = React.useState(false);
+
+// ...
+
+React.useEffect(() => {
+  setLoading(true);
+  fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
+    .then(response => { 
+      if (!response.ok) throw new Error("Error in fetch: " + response.statusText);  
+      return response.json();
+    })
+    .then(responseData => setData(responseData))
+    .catch(err => console.error(err))
+    .finally(() => setLoading(false));
+}, []);
+
+// ...
+```
 :::note
 In the NASA APOD example, we made a network request using the `useEffect` hook because we wanted to display the APOD image once after the component is rendered the first time. When a request requires some user input, such as pressing a button, you can trigger the request within the button's `onClick` event handler, and the `useEffect` hook is not needed. You should avoid using unnecessary `useEffect`s as it increases the complexity of the component.
 :::
