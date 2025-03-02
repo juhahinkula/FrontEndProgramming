@@ -253,13 +253,12 @@ const handleDelete = () => {
 }
 ```
 - If you select a row in the grid and press the Delete button, the selected row is deleted from the grid. If you don't select any row and press the Delete button, you can see an error in the console. We also have to check that one row is selected before filtering.
-
 ```ts title="TodoList.tsx"
 const handleDelete = () => {
-  if (gridRef.current?.api.getSelectedNodes().length > 0) {
+  if (gridRef.current && gridRef.current?.api.getSelectedNodes().length > 0) {
     setTodos(
       todos.filter(
-        (todo, index) => index !== Number(gridRef.current?.api.getSelectedNodes()[0].id)
+        (_, index) => index !== Number(gridRef.current?.api.getSelectedNodes()[0].id)
       )
     )
   } else {
@@ -267,7 +266,6 @@ const handleDelete = () => {
   }
 }
 ```
-
 - Now, we have finalized our Todolist using the AG Grid, and your Todolist should look like the following screenshot:
 
 ![Todolist](./img/todolist4.png)
